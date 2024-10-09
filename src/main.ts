@@ -23,3 +23,10 @@ middleButton.onclick = function buttonClick() {
   counterText.innerHTML = `${counterNum} clicks`;
 };
 app.append(middleButton);
+
+//Auto Clicker
+setInterval(click, 1000);
+function click() {
+  counterNum += 1;
+  counterText.innerHTML = `${counterNum} clicks`;
+}
