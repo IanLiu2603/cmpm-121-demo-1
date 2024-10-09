@@ -10,13 +10,13 @@ const gameName = "My amazing game hi";
 document.title = gameName;
 
 const header = document.createElement("h1");
-header.innerHTML = gameName;
+header.innerHTML = `${growthRate} chickens per second`;
 app.append(header);
 
 //Counter
 let counterNum: number = 0;
 const counterText = document.createElement("div");
-counterText.innerHTML = `${counterNum} chicks`;
+counterText.innerHTML = `${counterNum} chickens`;
 app.append(counterText);
 
 //Button
@@ -24,7 +24,7 @@ const middleButton = document.createElement("button");
 middleButton.innerHTML = "🐥";
 middleButton.onclick = function buttonClick() {
   counterNum += 1;
-  counterText.innerHTML = `${counterNum} chicks`;
+  counterText.innerHTML = `${counterNum} chickens`;
 };
 app.append(middleButton);
 
@@ -37,44 +37,78 @@ function step(timestamp: number) {
   } else {
     const timeGap = timestamp - prev;
     counterNum += (timeGap / 1000) * growthRate;
-    counterText.innerHTML = `${counterNum} chicks`;
+    counterText.innerHTML = `${counterNum} chickens`;
     prev = timestamp;
   }
   //Enable upgrade button
   if (counterNum > 10) {
-    upgradeButton.disabled = false;
+    upgradeA.disabled = false;
   }
   if (counterNum > 100) {
-    multiUpgrade.disabled = false;
+    upgradeB.disabled = false;
+  }
+  if (counterNum > 1000) {
+    upgradeC.disabled = false;
   }
 
   requestAnimationFrame(step);
 }
 
-//Upgrades
-const upgradeButton = document.createElement("button");
-upgradeButton.innerHTML = "Buy Auto Clicker";
-upgradeButton.disabled = true;
-upgradeButton.onclick = function buyUpgrade() {
+//Upgrade A
+const upgradeA = document.createElement("button");
+upgradeA.innerHTML = "Upgrade A: $10";
+upgradeA.disabled = true;
+let ownedA: number = 0;
+upgradeA.onclick = function buyUpgrade() {
   counterNum -= 10;
-  counterText.innerHTML = `${counterNum} chicks`;
-  growthRate += 1;
+  counterText.innerHTML = `${counterNum} chickens`;
+  growthRate += 0.1;
+  ownedA += 1;
+  header.innerHTML = `${growthRate} chickens per second`;
   if (counterNum < 10) {
-    upgradeButton.disabled = true;
+    upgradeA.disabled = true;
   }
+  upgradeCount.innerHTML = `${ownedA} A upgrades    |     ${ownedB} B upgrades     |     ${ownedC} C upgrades`;
 };
-app.append(upgradeButton);
+app.append(upgradeA);
 
-//10x upgrade
-const multiUpgrade = document.createElement("button");
-multiUpgrade.innerHTML = "Buy 10 Auto Clickers";
-multiUpgrade.disabled = true;
-multiUpgrade.onclick = function buyUpgrade() {
+//Upgrade B
+const upgradeB = document.createElement("button");
+upgradeB.innerHTML = "Upgrade B: $100";
+upgradeB.disabled = true;
+let ownedB: number = 0;
+upgradeB.onclick = function buyUpgrade() {
   counterNum -= 100;
-  counterText.innerHTML = `${counterNum} chicks`;
-  growthRate += 10;
+  counterText.innerHTML = `${counterNum} chickens`;
+  growthRate += 2;
+  ownedB += 1;
+  header.innerHTML = `${growthRate} chickens per second`;
   if (counterNum < 100) {
-    multiUpgrade.disabled = true;
+    upgradeB.disabled = true;
   }
+  upgradeCount.innerHTML = `${ownedA} A upgrades    |     ${ownedB} B upgrades     |     ${ownedC} C upgrades`;
 };
-app.append(multiUpgrade);
+app.append(upgradeB);
+
+//Upgrade C
+const upgradeC = document.createElement("button");
+let ownedC: number = 0;
+upgradeC.innerHTML = "Upgrade C: 1000$";
+upgradeC.disabled = true;
+upgradeC.onclick = function buyUpgrade() {
+  counterNum -= 1000;
+  counterText.innerHTML = `${counterNum} chickens`;
+  growthRate += 50;
+  ownedC += 1;
+  header.innerHTML = `${growthRate} chickens per second`;
+  if (counterNum < 1000) {
+    upgradeC.disabled = true;
+  }
+  upgradeCount.innerHTML = `${ownedA} A upgrades    |     ${ownedB} B upgrades     |     ${ownedC} C upgrades`;
+};
+app.append(upgradeC);
+
+//Upgrade Count
+const upgradeCount = document.createElement("footer");
+upgradeCount.innerHTML = `${ownedA} A upgrades    |     ${ownedB} B upgrades     |     ${ownedC} C upgrades`;
+app.append(upgradeCount);
