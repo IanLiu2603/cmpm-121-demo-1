@@ -41,13 +41,13 @@ function step(timestamp: number) {
     prev = timestamp;
   }
   //Enable upgrade button
-  if (counterNum > 10) {
+  if (counterNum > costA) {
     upgradeA.disabled = false;
   }
-  if (counterNum > 100) {
+  if (counterNum > costB) {
     upgradeB.disabled = false;
   }
-  if (counterNum > 1000) {
+  if (counterNum > costC) {
     upgradeC.disabled = false;
   }
 
@@ -56,16 +56,19 @@ function step(timestamp: number) {
 
 //Upgrade A
 const upgradeA = document.createElement("button");
-upgradeA.innerHTML = "Upgrade A: $10";
+let costA: number = 10;
+upgradeA.innerHTML = `Upgrade A: $${costA}`;
 upgradeA.disabled = true;
 let ownedA: number = 0;
 upgradeA.onclick = function buyUpgrade() {
-  counterNum -= 10;
+  counterNum -= costA;
   counterText.innerHTML = `${counterNum} chickens`;
   growthRate += 0.1;
   ownedA += 1;
+  costA *= 1.15;
+  upgradeA.innerHTML = `Upgrade A: $${costA}`;
   header.innerHTML = `${growthRate} chickens per second`;
-  if (counterNum < 10) {
+  if (counterNum < costA) {
     upgradeA.disabled = true;
   }
   upgradeCount.innerHTML = `${ownedA} A upgrades    |     ${ownedB} B upgrades     |     ${ownedC} C upgrades`;
@@ -74,16 +77,19 @@ app.append(upgradeA);
 
 //Upgrade B
 const upgradeB = document.createElement("button");
-upgradeB.innerHTML = "Upgrade B: $100";
+let costB: number = 100;
+upgradeB.innerHTML = `Upgrade B: $${costB}`;
 upgradeB.disabled = true;
 let ownedB: number = 0;
 upgradeB.onclick = function buyUpgrade() {
-  counterNum -= 100;
+  counterNum -= costB;
   counterText.innerHTML = `${counterNum} chickens`;
   growthRate += 2;
   ownedB += 1;
+  costB *= 1.15;
+  upgradeB.innerHTML = `Upgrade B: $${costB}`;
   header.innerHTML = `${growthRate} chickens per second`;
-  if (counterNum < 100) {
+  if (counterNum < costB) {
     upgradeB.disabled = true;
   }
   upgradeCount.innerHTML = `${ownedA} A upgrades    |     ${ownedB} B upgrades     |     ${ownedC} C upgrades`;
@@ -93,15 +99,18 @@ app.append(upgradeB);
 //Upgrade C
 const upgradeC = document.createElement("button");
 let ownedC: number = 0;
-upgradeC.innerHTML = "Upgrade C: 1000$";
+let costC: number = 1000;
+upgradeC.innerHTML = `Upgrade C: $${costC}`;
 upgradeC.disabled = true;
 upgradeC.onclick = function buyUpgrade() {
-  counterNum -= 1000;
+  counterNum -= costC;
   counterText.innerHTML = `${counterNum} chickens`;
   growthRate += 50;
   ownedC += 1;
+  costC *= 1.15;
+  upgradeC.innerHTML = `Upgrade C: $${costC}`;
   header.innerHTML = `${growthRate} chickens per second`;
-  if (counterNum < 1000) {
+  if (counterNum < costC) {
     upgradeC.disabled = true;
   }
   upgradeCount.innerHTML = `${ownedA} A upgrades    |     ${ownedB} B upgrades     |     ${ownedC} C upgrades`;
