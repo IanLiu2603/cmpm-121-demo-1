@@ -1,5 +1,8 @@
 import "./style.css";
 
+let start: number;
+let prev: number;
+
 const app: HTMLDivElement = document.querySelector("#app")!;
 
 const gameName = "My amazing game hi";
@@ -25,8 +28,22 @@ middleButton.onclick = function buttonClick() {
 app.append(middleButton);
 
 //Auto Clicker
-setInterval(click, 1000);
-function click() {
-  counterNum += 1;
-  counterText.innerHTML = `${counterNum} clicks`;
+requestAnimationFrame(step);
+
+// setInterval(click, 1000);
+// function click() {
+//   counterNum += 1;
+//   counterText.innerHTML = `${counterNum} clicks`;
+// }
+function step(timestamp: number) {
+  if (start === undefined) {
+    start = timestamp;
+    prev = timestamp;
+  } else {
+    const timeGap = timestamp - prev;
+    counterNum += timeGap / 1000;
+    counterText.innerHTML = `${counterNum} clicks`;
+    prev = timestamp;
+  }
+  requestAnimationFrame(step);
 }
