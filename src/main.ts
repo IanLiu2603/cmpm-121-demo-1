@@ -6,11 +6,12 @@ let growthRate: number = 0;
 
 const app: HTMLDivElement = document.querySelector("#app")!;
 
-const gameName = "My amazing game hi";
+const gameName = "Chicken Farm";
 document.title = gameName;
 
 const header = document.createElement("h1");
 header.innerHTML = `${growthRate} chickens per second`;
+
 app.append(header);
 
 //Counter
@@ -26,6 +27,7 @@ middleButton.onclick = function buttonClick() {
   counterNum += 1;
   counterText.innerHTML = `${counterNum} chickens`;
 };
+
 app.append(middleButton);
 
 //Auto Clicker
@@ -54,10 +56,10 @@ function step(timestamp: number) {
   requestAnimationFrame(step);
 }
 
-//Upgrade A
+//Upgrade A: Bronze Egg
 const upgradeA = document.createElement("button");
 let costA: number = 10;
-upgradeA.innerHTML = `Upgrade A: $${costA}`;
+upgradeA.innerHTML = `Bronze Egg: $${costA}`;
 upgradeA.disabled = true;
 let ownedA: number = 0;
 upgradeA.onclick = function buyUpgrade() {
@@ -66,19 +68,19 @@ upgradeA.onclick = function buyUpgrade() {
   growthRate += 0.1;
   ownedA += 1;
   costA *= 1.15;
-  upgradeA.innerHTML = `Upgrade A: $${costA}`;
+  upgradeA.innerHTML = `Bronze Egg: $${costA}`;
   header.innerHTML = `${growthRate} chickens per second`;
   if (counterNum < costA) {
     upgradeA.disabled = true;
   }
-  upgradeCount.innerHTML = `${ownedA} A upgrades    |     ${ownedB} B upgrades     |     ${ownedC} C upgrades`;
+  upgradeCount.innerHTML = `${ownedA} Bronze Eggs    |     ${ownedB} Silver Eggs     |     ${ownedC} Golden Eggs`;
 };
 app.append(upgradeA);
 
 //Upgrade B
 const upgradeB = document.createElement("button");
 let costB: number = 100;
-upgradeB.innerHTML = `Upgrade B: $${costB}`;
+upgradeB.innerHTML = `Silver Egg: $${costB}`;
 upgradeB.disabled = true;
 let ownedB: number = 0;
 upgradeB.onclick = function buyUpgrade() {
@@ -87,12 +89,12 @@ upgradeB.onclick = function buyUpgrade() {
   growthRate += 2;
   ownedB += 1;
   costB *= 1.15;
-  upgradeB.innerHTML = `Upgrade B: $${costB}`;
+  upgradeB.innerHTML = `Silver Egg: $${costB}`;
   header.innerHTML = `${growthRate} chickens per second`;
   if (counterNum < costB) {
     upgradeB.disabled = true;
   }
-  upgradeCount.innerHTML = `${ownedA} A upgrades    |     ${ownedB} B upgrades     |     ${ownedC} C upgrades`;
+  upgradeCount.innerHTML = `${ownedA} Bronze Eggs    |     ${ownedB} Silver Eggs     |     ${ownedC} Golden Eggs`;
 };
 app.append(upgradeB);
 
@@ -100,7 +102,7 @@ app.append(upgradeB);
 const upgradeC = document.createElement("button");
 let ownedC: number = 0;
 let costC: number = 1000;
-upgradeC.innerHTML = `Upgrade C: $${costC}`;
+upgradeC.innerHTML = `Golden Egg: $${costC}`;
 upgradeC.disabled = true;
 upgradeC.onclick = function buyUpgrade() {
   counterNum -= costC;
@@ -108,16 +110,16 @@ upgradeC.onclick = function buyUpgrade() {
   growthRate += 50;
   ownedC += 1;
   costC *= 1.15;
-  upgradeC.innerHTML = `Upgrade C: $${costC}`;
+  upgradeC.innerHTML = `Golden Egg: $${costC}`;
   header.innerHTML = `${growthRate} chickens per second`;
   if (counterNum < costC) {
     upgradeC.disabled = true;
   }
-  upgradeCount.innerHTML = `${ownedA} A upgrades    |     ${ownedB} B upgrades     |     ${ownedC} C upgrades`;
+  upgradeCount.innerHTML = `${ownedA} Bronze Eggs    |     ${ownedB} Silver Eggs     |     ${ownedC} Golden Eggs`;
 };
 app.append(upgradeC);
 
 //Upgrade Count
 const upgradeCount = document.createElement("footer");
-upgradeCount.innerHTML = `${ownedA} A upgrades    |     ${ownedB} B upgrades     |     ${ownedC} C upgrades`;
+upgradeCount.innerHTML = `${ownedA} Bronze Eggs    |     ${ownedB} Silver Eggs     |     ${ownedC} Golden Eggs`;
 app.append(upgradeCount);
