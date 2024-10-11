@@ -14,6 +14,15 @@ header.innerHTML = `${growthRate} chickens per second`;
 
 app.append(header);
 
+//Update Functions
+function updateCounter() {
+  upgradeCount.innerHTML = `${ownedA} ${availableItems[0].name}    
+  |     ${ownedB} ${availableItems[1].name}    
+  |     ${ownedC} ${availableItems[2].name}
+  |     ${ownedD} ${availableItems[3].name}
+  |     ${ownedE} ${availableItems[4].name}`;
+}
+
 //Item structure
 interface Item {
   name: string;
@@ -25,6 +34,8 @@ const availableItems: Item[] = [
   { name: "White Eggs", cost: 10, rate: 0.1 },
   { name: "Silver Eggs", cost: 100, rate: 2 },
   { name: "Golden Eggs", cost: 1000, rate: 50 },
+  { name: "Mystical Eggs", cost: 10000, rate: 200 },
+  { name: "Galactic Eggs", cost: 100000, rate: 4000 },
 ];
 
 //Counter
@@ -65,6 +76,12 @@ function step(timestamp: number) {
   if (counterNum > availableItems[2].cost) {
     upgradeC.disabled = false;
   }
+  if (counterNum > availableItems[3].cost) {
+    upgradeD.disabled = false;
+  }
+  if (counterNum > availableItems[4].cost) {
+    upgradeE.disabled = false;
+  }
 
   requestAnimationFrame(step);
 }
@@ -85,7 +102,7 @@ upgradeA.onclick = function buyUpgrade() {
   if (counterNum < availableItems[0].cost) {
     upgradeA.disabled = true;
   }
-  upgradeCount.innerHTML = `${ownedA} ${availableItems[0].name}    |     ${ownedB} ${availableItems[1].name}    |     ${ownedC} ${availableItems[2].name}`;
+  updateCounter();
 };
 app.append(upgradeA);
 
@@ -105,7 +122,7 @@ upgradeB.onclick = function buyUpgrade() {
   if (counterNum < availableItems[1].cost) {
     upgradeB.disabled = true;
   }
-  upgradeCount.innerHTML = `${ownedA} ${availableItems[0].name}    |     ${ownedB} ${availableItems[1].name}    |     ${ownedC} ${availableItems[2].name}`;
+  updateCounter();
 };
 app.append(upgradeB);
 
@@ -125,11 +142,85 @@ upgradeC.onclick = function buyUpgrade() {
   if (counterNum < availableItems[2].cost) {
     upgradeC.disabled = true;
   }
-  upgradeCount.innerHTML = `${ownedA} ${availableItems[0].name}    |     ${ownedB} ${availableItems[1].name}    |     ${ownedC} ${availableItems[2].name}`;
+  updateCounter();
 };
 app.append(upgradeC);
 
+//Upgrade D
+const upgradeD = document.createElement("button");
+let ownedD: number = 0;
+upgradeD.innerHTML = `Mystical Egg: $${availableItems[3].cost}`;
+upgradeD.disabled = true;
+upgradeD.onclick = function buyUpgrade() {
+  counterNum -= availableItems[3].cost;
+  counterText.innerHTML = `${counterNum} chickens`;
+  growthRate += availableItems[3].rate;
+  ownedD += 1;
+  availableItems[3].cost *= 1.15;
+  upgradeD.innerHTML = `Mystical Egg: $${availableItems[3].cost}`;
+  header.innerHTML = `${growthRate} chickens per second`;
+  if (counterNum < availableItems[3].cost) {
+    upgradeD.disabled = true;
+  }
+  updateCounter();
+};
+app.append(upgradeD);
+
+//Upgrade E
+const upgradeE = document.createElement("button");
+let ownedE: number = 0;
+upgradeE.innerHTML = `Galactic Egg: $${availableItems[4].cost}`;
+upgradeE.disabled = true;
+upgradeE.onclick = function buyUpgrade() {
+  counterNum -= availableItems[4].cost;
+  counterText.innerHTML = `${counterNum} chickens`;
+  growthRate += availableItems[4].rate;
+  ownedE += 1;
+  availableItems[4].cost *= 1.15;
+  upgradeE.innerHTML = `Galactic Egg: $${availableItems[4].cost}`;
+  header.innerHTML = `${growthRate} chickens per second`;
+  if (counterNum < availableItems[4].cost) {
+    upgradeE.disabled = true;
+  }
+  updateCounter();
+};
+app.append(upgradeE);
+
 //Upgrade Count
 const upgradeCount = document.createElement("footer");
-upgradeCount.innerHTML = `${ownedA} ${availableItems[0].name}    |     ${ownedB} ${availableItems[1].name}    |     ${ownedC} ${availableItems[2].name}`;
+updateCounter();
 app.append(upgradeCount);
+
+//Descriptions button
+const descriptionButton = document.createElement("button");
+const descriptionText = document.createElement("div");
+
+descriptionText.style.textAlign = "left";
+descriptionText.innerHTML = `White Eggs: <br>
+Fresh from the coop, these simple eggs provide a slow but reliable source of chickens, producing 1 chicken every 10 seconds.<br><br>
+
+Silver Eggs<br>
+Crafted by the finest artisans, these luxurious silver eggs grant you 2 clicks per second, rapidly boosting your production and ensuring your chicken farm flourishes!<br>
+<br>
+Golden Eggs<br>
+A rare find! These glittering golden eggs produce 50 chickens per second.<br>
+<br>
+Mystical Eggs<br>
+Ancient and shrouded in enchantment, these mystical eggs possess the wisdom of ancient civilizations, providing an 200 chickens each second.
+<br><br>
+Galactic Eggs<br>
+Harvested from distant stars, these galactic eggs are not meant to be housed on a small planet such as Earth! They are able to feed civilizations by themselves by producing 4000 chickens every second.`;
+
+descriptionText.style.visibility = "hidden";
+descriptionButton.innerHTML = "Upgrade Details";
+let descript: boolean = false;
+descriptionButton.onclick = function toggleDescriptions() {
+  if (descript) {
+    descriptionText.style.visibility = "hidden";
+  } else {
+    descriptionText.style.visibility = "visible";
+    descript = true;
+  }
+};
+app.append(descriptionButton);
+app.append(descriptionText);
