@@ -224,5 +224,3 @@ descriptionButton.onclick = function toggleDescriptions() {
 };
 app.append(descriptionButton);
 app.append(descriptionText);
-
-
