@@ -32,6 +32,7 @@ app.append(middleButton);
 
 //Auto Clicker
 requestAnimationFrame(step);
+
 function step(timestamp: number) {
   if (start === undefined) {
     start = timestamp;
@@ -70,11 +71,11 @@ interface Item {
 }
 
 const availableItems: Item[] = [
-  { name: "White Eggs", cost: 10, rate: 0.1 },
-  { name: "Silver Eggs", cost: 100, rate: 2 },
-  { name: "Golden Eggs", cost: 1000, rate: 50 },
+  { name: "White Eggs", cost: 10, rate: 0.1},
+  { name: "Silver Eggs", cost: 100, rate: 2},
+  { name: "Golden Eggs", cost: 1000, rate: 50},
   { name: "Mystical Eggs", cost: 10000, rate: 200 },
-  { name: "Galactic Eggs", cost: 100000, rate: 4000 },
+  { name: "Galactic Eggs", cost: 100000, rate: 4000},
 ];
 
 //Update Functions
@@ -213,13 +214,11 @@ Harvested from distant stars, these galactic eggs are not meant to be housed on 
 
 descriptionText.style.visibility = "hidden";
 descriptionButton.innerHTML = "Upgrade Details";
-let descript: boolean = false;
 descriptionButton.onclick = function toggleDescriptions() {
-  if (descript) {
+  if (descriptionButton.style.visibility == "visible") {
     descriptionText.style.visibility = "hidden";
   } else {
     descriptionText.style.visibility = "visible";
-    descript = true;
   }
 };
 app.append(descriptionButton);
