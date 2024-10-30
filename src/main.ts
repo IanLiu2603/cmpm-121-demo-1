@@ -14,30 +14,6 @@ header.innerHTML = `${growthRate} chickens per second`;
 
 app.append(header);
 
-//Update Functions
-function updateCounter() {
-  upgradeCount.innerHTML = `${ownedWhiteEggs} ${availableItems[0].name}    
-  |     ${ownedSilverEggs} ${availableItems[1].name}    
-  |     ${ownedGoldEggs} ${availableItems[2].name}
-  |     ${ownedMysticEggs} ${availableItems[3].name}
-  |     ${ownedGalacticEggs} ${availableItems[4].name}`;
-}
-
-//Item structure
-interface Item {
-  name: string;
-  cost: number;
-  rate: number;
-}
-
-const availableItems: Item[] = [
-  { name: "White Eggs", cost: 10, rate: 0.1 },
-  { name: "Silver Eggs", cost: 100, rate: 2 },
-  { name: "Golden Eggs", cost: 1000, rate: 50 },
-  { name: "Mystical Eggs", cost: 10000, rate: 200 },
-  { name: "Galactic Eggs", cost: 100000, rate: 4000 },
-];
-
 //Counter
 let counterNum: number = 0;
 const counterText = document.createElement("div");
@@ -84,6 +60,30 @@ function step(timestamp: number) {
   }
 
   requestAnimationFrame(step);
+}
+
+//Item structure
+interface Item {
+  name: string;
+  cost: number;
+  rate: number;
+}
+
+const availableItems: Item[] = [
+  { name: "White Eggs", cost: 10, rate: 0.1 },
+  { name: "Silver Eggs", cost: 100, rate: 2 },
+  { name: "Golden Eggs", cost: 1000, rate: 50 },
+  { name: "Mystical Eggs", cost: 10000, rate: 200 },
+  { name: "Galactic Eggs", cost: 100000, rate: 4000 },
+];
+
+//Update Functions
+function updateCounter() {
+  upgradeCount.innerHTML = `${ownedWhiteEggs} ${availableItems[0].name}    
+  |     ${ownedSilverEggs} ${availableItems[1].name}    
+  |     ${ownedGoldEggs} ${availableItems[2].name}
+  |     ${ownedMysticEggs} ${availableItems[3].name}
+  |     ${ownedGalacticEggs} ${availableItems[4].name}`;
 }
 
 //Upgrade A: White Egg
@@ -224,3 +224,5 @@ descriptionButton.onclick = function toggleDescriptions() {
 };
 app.append(descriptionButton);
 app.append(descriptionText);
+
+
