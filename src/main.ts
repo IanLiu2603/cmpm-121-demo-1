@@ -16,11 +16,11 @@ app.append(header);
 
 //Update Functions
 function updateCounter() {
-  upgradeCount.innerHTML = `${ownedA} ${availableItems[0].name}    
-  |     ${ownedB} ${availableItems[1].name}    
-  |     ${ownedC} ${availableItems[2].name}
-  |     ${ownedD} ${availableItems[3].name}
-  |     ${ownedE} ${availableItems[4].name}`;
+  upgradeCount.innerHTML = `${ownedWhiteEggs} ${availableItems[0].name}    
+  |     ${ownedSilverEggs} ${availableItems[1].name}    
+  |     ${ownedGoldEggs} ${availableItems[2].name}
+  |     ${ownedMysticEggs} ${availableItems[3].name}
+  |     ${ownedGalacticEggs} ${availableItems[4].name}`;
 }
 
 //Item structure
@@ -68,123 +68,123 @@ function step(timestamp: number) {
   }
   //Enable upgrade button
   if (counterNum > availableItems[0].cost) {
-    upgradeA.disabled = false;
+    buyWhiteEgg.disabled = false;
   }
   if (counterNum > availableItems[1].cost) {
-    upgradeB.disabled = false;
+    buySilverEgg.disabled = false;
   }
   if (counterNum > availableItems[2].cost) {
-    upgradeC.disabled = false;
+    buyGoldEgg.disabled = false;
   }
   if (counterNum > availableItems[3].cost) {
-    upgradeD.disabled = false;
+    buyMysticalEgg.disabled = false;
   }
   if (counterNum > availableItems[4].cost) {
-    upgradeE.disabled = false;
+    buyGalacticEgg.disabled = false;
   }
 
   requestAnimationFrame(step);
 }
 
-//Upgrade A: Bronze Egg
-const upgradeA = document.createElement("button");
-upgradeA.innerHTML = `White Egg: $${availableItems[0].cost}`; //Purposely left hard coded for grammar to make sense
-upgradeA.disabled = true;
-let ownedA: number = 0;
-upgradeA.onclick = function buyUpgrade() {
+//Upgrade A: White Egg
+const buyWhiteEgg = document.createElement("button");
+buyWhiteEgg.innerHTML = `White Egg: $${availableItems[0].cost}`; //Purposely left hard coded for grammar to make sense
+buyWhiteEgg.disabled = true;
+let ownedWhiteEggs: number = 0;
+buyWhiteEgg.onclick = function buyUpgrade() {
   counterNum -= availableItems[0].cost;
   counterText.innerHTML = `${counterNum} chickens`;
   growthRate += availableItems[0].rate;
-  ownedA += 1;
+  ownedWhiteEggs += 1;
   availableItems[0].cost *= 1.15;
-  upgradeA.innerHTML = `White Egg: $${availableItems[0].cost}`;
+  buyWhiteEgg.innerHTML = `White Egg: $${availableItems[0].cost}`;
   header.innerHTML = `${growthRate} chickens per second`;
   if (counterNum < availableItems[0].cost) {
-    upgradeA.disabled = true;
+    buyWhiteEgg.disabled = true;
   }
   updateCounter();
 };
-app.append(upgradeA);
+app.append(buyWhiteEgg);
 
 //Upgrade B
-const upgradeB = document.createElement("button");
-upgradeB.innerHTML = `Silver Egg: $${availableItems[1].cost}`;
-upgradeB.disabled = true;
-let ownedB: number = 0;
-upgradeB.onclick = function buyUpgrade() {
+const buySilverEgg = document.createElement("button");
+buySilverEgg.innerHTML = `Silver Egg: $${availableItems[1].cost}`;
+buySilverEgg.disabled = true;
+let ownedSilverEggs: number = 0;
+buySilverEgg.onclick = function buyUpgrade() {
   counterNum -= availableItems[1].cost;
   counterText.innerHTML = `${counterNum} chickens`;
   growthRate += availableItems[1].rate;
-  ownedB += 1;
+  ownedSilverEggs += 1;
   availableItems[1].cost *= 1.15;
-  upgradeB.innerHTML = `Silver Egg: $${availableItems[1].cost}`;
+  buySilverEgg.innerHTML = `Silver Egg: $${availableItems[1].cost}`;
   header.innerHTML = `${growthRate} chickens per second`;
   if (counterNum < availableItems[1].cost) {
-    upgradeB.disabled = true;
+    buySilverEgg.disabled = true;
   }
   updateCounter();
 };
-app.append(upgradeB);
+app.append(buySilverEgg);
 
 //Upgrade C
-const upgradeC = document.createElement("button");
-let ownedC: number = 0;
-upgradeC.innerHTML = `Golden Egg: $${availableItems[2].cost}`;
-upgradeC.disabled = true;
-upgradeC.onclick = function buyUpgrade() {
+const buyGoldEgg = document.createElement("button");
+let ownedGoldEggs: number = 0;
+buyGoldEgg.innerHTML = `Golden Egg: $${availableItems[2].cost}`;
+buyGoldEgg.disabled = true;
+buyGoldEgg.onclick = function buyUpgrade() {
   counterNum -= availableItems[2].cost;
   counterText.innerHTML = `${counterNum} chickens`;
   growthRate += availableItems[2].rate;
-  ownedC += 1;
+  ownedGoldEggs += 1;
   availableItems[2].cost *= 1.15;
-  upgradeC.innerHTML = `Golden Egg: $${availableItems[2].cost}`;
+  buyGoldEgg.innerHTML = `Golden Egg: $${availableItems[2].cost}`;
   header.innerHTML = `${growthRate} chickens per second`;
   if (counterNum < availableItems[2].cost) {
-    upgradeC.disabled = true;
+    buyGoldEgg.disabled = true;
   }
   updateCounter();
 };
-app.append(upgradeC);
+app.append(buyGoldEgg);
 
 //Upgrade D
-const upgradeD = document.createElement("button");
-let ownedD: number = 0;
-upgradeD.innerHTML = `Mystical Egg: $${availableItems[3].cost}`;
-upgradeD.disabled = true;
-upgradeD.onclick = function buyUpgrade() {
+const buyMysticalEgg = document.createElement("button");
+let ownedMysticEggs: number = 0;
+buyMysticalEgg.innerHTML = `Mystical Egg: $${availableItems[3].cost}`;
+buyMysticalEgg.disabled = true;
+buyMysticalEgg.onclick = function buyUpgrade() {
   counterNum -= availableItems[3].cost;
   counterText.innerHTML = `${counterNum} chickens`;
   growthRate += availableItems[3].rate;
-  ownedD += 1;
+  ownedMysticEggs += 1;
   availableItems[3].cost *= 1.15;
-  upgradeD.innerHTML = `Mystical Egg: $${availableItems[3].cost}`;
+  buyMysticalEgg.innerHTML = `Mystical Egg: $${availableItems[3].cost}`;
   header.innerHTML = `${growthRate} chickens per second`;
   if (counterNum < availableItems[3].cost) {
-    upgradeD.disabled = true;
+    buyMysticalEgg.disabled = true;
   }
   updateCounter();
 };
-app.append(upgradeD);
+app.append(buyMysticalEgg);
 
 //Upgrade E
-const upgradeE = document.createElement("button");
-let ownedE: number = 0;
-upgradeE.innerHTML = `Galactic Egg: $${availableItems[4].cost}`;
-upgradeE.disabled = true;
-upgradeE.onclick = function buyUpgrade() {
+const buyGalacticEgg = document.createElement("button");
+let ownedGalacticEggs: number = 0;
+buyGalacticEgg.innerHTML = `Galactic Egg: $${availableItems[4].cost}`;
+buyGalacticEgg.disabled = true;
+buyGalacticEgg.onclick = function buyUpgrade() {
   counterNum -= availableItems[4].cost;
   counterText.innerHTML = `${counterNum} chickens`;
   growthRate += availableItems[4].rate;
-  ownedE += 1;
+  ownedGalacticEggs += 1;
   availableItems[4].cost *= 1.15;
-  upgradeE.innerHTML = `Galactic Egg: $${availableItems[4].cost}`;
+  buyGalacticEgg.innerHTML = `Galactic Egg: $${availableItems[4].cost}`;
   header.innerHTML = `${growthRate} chickens per second`;
   if (counterNum < availableItems[4].cost) {
-    upgradeE.disabled = true;
+    buyGalacticEgg.disabled = true;
   }
   updateCounter();
 };
-app.append(upgradeE);
+app.append(buyGalacticEgg);
 
 //Upgrade Count
 const upgradeCount = document.createElement("footer");
