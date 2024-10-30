@@ -10,7 +10,7 @@ const gameName = "Chicken Farm";
 document.title = gameName;
 
 const header = document.createElement("h1");
-header.innerHTML = `${growthRate} chickens per second`;
+header.innerHTML = `${growthRate.toFixed(2)} chickens per second`;
 
 app.append(header);
 
@@ -28,6 +28,15 @@ middleButton.onclick = function buttonClick() {
   counterText.innerHTML = `${counterNum} chickens`;
 };
 
+//https://github.com/eeg0re/cmpm-121-demo-1/blob/main/src/main.ts
+//Inspired by this repo to make clicker a circle and make it bigger
+
+middleButton.style.width = "180px";
+middleButton.style.height = "180px";
+middleButton.style.fontSize = "55px";
+middleButton.style.borderRadius = "50%";
+middleButton.style.boxShadow = "5px 5px 15px rgba(0, 0, 0, 0.3)";
+
 app.append(middleButton);
 
 //Auto Clicker
@@ -40,7 +49,8 @@ function step(timestamp: number) {
   } else {
     const timeGap = timestamp - prev;
     counterNum += (timeGap / 1000) * growthRate;
-    counterText.innerHTML = `${counterNum} chickens`;
+    //https://github.com/JamesNYim/cmpm-121-demo-1/blob/main/src/main.ts Inspired the rounding of egg count
+    counterText.innerHTML = `${counterNum.toFixed(2)} chickens`;
     prev = timestamp;
   }
   //Enable upgrade button
@@ -99,7 +109,8 @@ buyWhiteEgg.onclick = function buyUpgrade() {
   ownedWhiteEggs += 1;
   availableItems[0].cost *= 1.15;
   buyWhiteEgg.innerHTML = `White Egg: $${availableItems[0].cost}`;
-  header.innerHTML = `${growthRate} chickens per second`;
+  //https://github.com/JamesNYim/cmpm-121-demo-1/blob/main/src/main.ts Inspired the rounding of egg count
+  header.innerHTML = `${growthRate.toFixed(2)} chickens per second`;
   if (counterNum < availableItems[0].cost) {
     buyWhiteEgg.disabled = true;
   }
@@ -119,7 +130,7 @@ buySilverEgg.onclick = function buyUpgrade() {
   ownedSilverEggs += 1;
   availableItems[1].cost *= 1.15;
   buySilverEgg.innerHTML = `Silver Egg: $${availableItems[1].cost}`;
-  header.innerHTML = `${growthRate} chickens per second`;
+  header.innerHTML = `${growthRate.toFixed(2)} chickens per second`;
   if (counterNum < availableItems[1].cost) {
     buySilverEgg.disabled = true;
   }
@@ -139,7 +150,7 @@ buyGoldEgg.onclick = function buyUpgrade() {
   ownedGoldEggs += 1;
   availableItems[2].cost *= 1.15;
   buyGoldEgg.innerHTML = `Golden Egg: $${availableItems[2].cost}`;
-  header.innerHTML = `${growthRate} chickens per second`;
+  header.innerHTML = `${growthRate.toFixed(2)} chickens per second`;
   if (counterNum < availableItems[2].cost) {
     buyGoldEgg.disabled = true;
   }
@@ -159,7 +170,7 @@ buyMysticalEgg.onclick = function buyUpgrade() {
   ownedMysticEggs += 1;
   availableItems[3].cost *= 1.15;
   buyMysticalEgg.innerHTML = `Mystical Egg: $${availableItems[3].cost}`;
-  header.innerHTML = `${growthRate} chickens per second`;
+  header.innerHTML = `${growthRate.toFixed(2)} chickens per second`;
   if (counterNum < availableItems[3].cost) {
     buyMysticalEgg.disabled = true;
   }
@@ -179,7 +190,7 @@ buyGalacticEgg.onclick = function buyUpgrade() {
   ownedGalacticEggs += 1;
   availableItems[4].cost *= 1.15;
   buyGalacticEgg.innerHTML = `Galactic Egg: $${availableItems[4].cost}`;
-  header.innerHTML = `${growthRate} chickens per second`;
+  header.innerHTML = `${growthRate.toFixed(2)} chickens per second`;
   if (counterNum < availableItems[4].cost) {
     buyGalacticEgg.disabled = true;
   }
