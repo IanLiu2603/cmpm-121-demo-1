@@ -71,11 +71,11 @@ interface Item {
 }
 
 const availableItems: Item[] = [
-  { name: "White Eggs", cost: 10, rate: 0.1},
-  { name: "Silver Eggs", cost: 100, rate: 2},
-  { name: "Golden Eggs", cost: 1000, rate: 50},
+  { name: "White Eggs", cost: 10, rate: 0.1 },
+  { name: "Silver Eggs", cost: 100, rate: 2 },
+  { name: "Golden Eggs", cost: 1000, rate: 50 },
   { name: "Mystical Eggs", cost: 10000, rate: 200 },
-  { name: "Galactic Eggs", cost: 100000, rate: 4000},
+  { name: "Galactic Eggs", cost: 100000, rate: 4000 },
 ];
 
 //Update Functions
